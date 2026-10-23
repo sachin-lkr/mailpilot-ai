@@ -1,4 +1,5 @@
 import axios from "axios";
+import EmailHistoryModel from "../models/EmailHistoryModel.js";
 
 export const generateEmail = async (req, res) => {
   try {
@@ -22,7 +23,7 @@ export const generateEmail = async (req, res) => {
         .json({ message: "Prompt cannot exceed 2000 characters" });
     }
 
-    // Call Groq API 
+    // Call Groq API
     const groqApiKey = process.env.API_KEY;
     if (!groqApiKey) {
       return res.status(500).json({ message: "AI service is not configured" });
@@ -160,7 +161,7 @@ Return ONLY valid JSON.`;
           type: "json_object",
         },
 
-       // Limit the reasoning
+        // Limit the reasoning
         reasoning_effort: "low",
         include_reasoning: false,
 
@@ -178,7 +179,7 @@ Return ONLY valid JSON.`;
     );
 
     // Parse the Groq response
-  
+
     const choice = aiResponse.data.choices?.[0];
 
     if (!choice?.message) {
@@ -189,14 +190,11 @@ Return ONLY valid JSON.`;
 
     console.log("AI Generated Text:", generatedText);
 
-    if (
-      typeof generatedText !== "string" ||
-      !generatedText.trim()
-    ) {
+    if (typeof generatedText !== "string" || !generatedText.trim()) {
       throw new Error("AI returned an empty response");
     }
 
- //   using JSON mode.
+    //   using JSON mode.
     let parsedResponse;
 
     try {
@@ -209,7 +207,6 @@ Return ONLY valid JSON.`;
         error: "The AI returned invalid JSON.",
       });
     }
-
 
     const emailData = {
       subject: parsedResponse.subject || "New Opportunity",
@@ -224,14 +221,18 @@ Return ONLY valid JSON.`;
         message: "AI generated incomplete email data. Please try again.",
       });
     }
-
-    res.status(200).json({
+    // Save to history
+    const historyEntry = await EmailHistoryModel.create({
       userId: req.user._id,
       prompt: prompt.trim(),
       subject: emailData.subject,
       emailBody: emailData.emailBody,
       linkedInDM: emailData.linkedInDM,
       followUpEmail: emailData.followUpEmail,
+    });
+
+    res.status(200).json({
+      historyEntry
     });
   } catch (error) {
     console.error(
@@ -250,5 +251,14 @@ Return ONLY valid JSON.`;
       message: "Failed to generate email",
       error: error.response?.data?.error?.message || error.message,
     });
+  }
+};
+
+export const getHistory = async (req, res) => {
+  try {
+    const history = await EmailHistoryModel.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    res.status(200).json(history);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch history' });
   }
 };
