@@ -1,13 +1,40 @@
-import React from 'react'
-import Home from './page/Home'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Home from "./page/Home";
+import Signup from "./page/Signup";
+import Login from "./page/Login";
+import OtpVerify from "./page/OtpVerify";
+import { useAuth } from "./context/AuthContext";
 
 
-const App = () => {
+function App() {
+  const { user, loading } = useAuth();
+
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-500">
+        Loading...
+      </div>
+    );
+
   return (
-    <div>
-      <Home/>
-    </div>
-  )
+    <>
+      <Toaster position="top-right" />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+         <Route path="/login" element={<Login />} />
+          <Route path="/otpverify" element={<OtpVerify />} />
+          
+
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
