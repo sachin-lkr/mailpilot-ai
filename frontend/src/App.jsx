@@ -10,6 +10,7 @@ import Signup from "./page/Signup";
 import Login from "./page/Login";
 import OtpVerify from "./page/OtpVerify";
 import { useAuth } from "./context/AuthContext";
+import Dashboard from "./page/Dashboard";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
          <Route path="/login" element={<Login />} />
           <Route path="/otpverify" element={<OtpVerify />} />
+          <Route path="/dashborad" element={<Dashboard/>}/>
           
 
       </Routes>

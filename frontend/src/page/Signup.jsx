@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import {SparklesIcon, EnvelopeIcon, LockClosedIcon, UserIcon,} from "@heroicons/react/24/outline";
 import api from "../utils/api";
 import BrandingPanel from "../components/LoginSignup/BrandingPanel";
-import { brandingData } from "../data/barandingData.js";
+import { brandingData } from "../data/barandingData/barandingData.js";
 
 const Signup = () => {
   const [name, setName] = useState("");

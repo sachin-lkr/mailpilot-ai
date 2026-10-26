@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { SparklesIcon,EnvelopeIcon, LockClosedIcon,} from "@heroicons/react/24/outline";
 import api from "../utils/api";
 import { useAuth } from "../context/AuthContext";
-import { loginBrandingData } from "../data/barandingData.js";
+import { loginBrandingData } from "../data/barandingData/barandingData.js";
 import BrandingPanel from "../components/LoginSignup/BrandingPanel";
 
 const Login = () => {
