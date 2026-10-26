@@ -36,7 +36,7 @@ function App() {
           path="/login"
           element={!user ? <Login /> : <Navigate to="/dashboard" />}
         />
-        <Route path="/otp-verify" element={<OtpVerify />} />
+        <Route path="/verify-otp" element={<OtpVerify />} />
         {/* Protected Routes */}
         <Route
           path="/dashboard"

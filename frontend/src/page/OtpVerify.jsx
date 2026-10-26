@@ -11,7 +11,7 @@ const OtpVerify= () => {
     const navigate = useNavigate();
     const { login } = useAuth();
     const email = location.state?.email;
- 
+    const userId = location.state?.userId;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +22,7 @@ const OtpVerify= () => {
             toast.success('Email verified successfully!');
             navigate('/dashboard');
         } catch (error) {
+            
             toast.error(error.response?.data?.message || 'Verification failed');
         } finally {
             setLoading(false);

@@ -8,7 +8,10 @@ export default function ResultsPanel({
   copied,
   copyToClipboard,
   content,
-}) {
+}) 
+
+{
+ const emailResult = result?.historyEntry ?? result;
   return (
     <section className="lg:col-span-8">
       <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
@@ -38,7 +41,7 @@ export default function ResultsPanel({
             <ResultCard
               key={item.key}
               item={item}
-              content={result[item.key]}
+              content={emailResult?.[item.key]}
               copied={copied}
               onCopy={copyToClipboard}
             />

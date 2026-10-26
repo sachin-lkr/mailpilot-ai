@@ -3,7 +3,7 @@ import PromptPanel from "../components/Dashboard/PromptPanel";
 import ProTip from "../components/Dashboard/ProTip";
 import ResultsPanel from "../components/Dashboard/ResultPanel"
 import DashboardFooter from "../components/Dashboard/DashboardFooter";
-import { dashboardContent,examples } from "../data/dashboardData/dashboardData";
+import { dashboardContent,examples } from "../data/dashboardData/dashboardData.js";
 import useEmailGenerator from "../Hooks/useEmailGenrator.js"
 
 const Dashboard = () => {
@@ -16,7 +16,6 @@ const Dashboard = () => {
     handleGenerate,
     copyToClipboard,
   } = useEmailGenerator();
-
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#F8FAFF] via-white to-[#F1EDFF] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">

@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import api from "../utils/api";
+import api from "../utils/api.js";
 
 export default function useEmailGenerator() {
   const [prompt, setPrompt] = useState("");
