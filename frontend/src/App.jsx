@@ -9,9 +9,9 @@ import Home from "./page/Home";
 import Signup from "./page/Signup";
 import Login from "./page/Login";
 import OtpVerify from "./page/OtpVerify";
+import Layout from "./components/Layout";
 import { useAuth } from "./context/AuthContext";
 import Dashboard from "./page/Dashboard";
-
 
 function App() {
   const { user, loading } = useAuth();
@@ -28,12 +28,22 @@ function App() {
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-         <Route path="/login" element={<Login />} />
-          <Route path="/otpverify" element={<OtpVerify />} />
-          <Route path="/dashborad" element={<Dashboard/>}/>
-          
-
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to="/dashboard" />}
+        />
+        <Route path="/otp-verify" element={<OtpVerify />} />
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={user ? <Layout /> : <Navigate to="/login" />}
+        >
+          <Route index element={<Dashboard />} />
+        </Route>
       </Routes>
     </>
   );
