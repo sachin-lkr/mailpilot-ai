@@ -12,6 +12,7 @@ import OtpVerify from "./page/OtpVerify";
 import Layout from "./components/Layout";
 import { useAuth } from "./context/AuthContext";
 import Dashboard from "./page/Dashboard";
+import History from "./page/History";
 
 function App() {
   const { user, loading } = useAuth();
@@ -43,6 +44,7 @@ function App() {
           element={user ? <Layout /> : <Navigate to="/login" />}
         >
           <Route index element={<Dashboard />} />
+          <Route path="/dashboard/history" element={<History />}/>
         </Route>
       </Routes>
     </>
