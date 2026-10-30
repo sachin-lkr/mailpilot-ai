@@ -3,6 +3,7 @@ import connectDB from "./src/config/dataBase.js";
 import authRoutes from "./src/routes/authRoutes.js"
 import aiRoutes from "./src/routes/aiRoutes.js"
 import cors from "cors"
+import dotenv from "dotenv";
 
 dotenv.config();
 const app=express();
