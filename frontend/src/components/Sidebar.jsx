@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {HomeIcon,ClockIcon,SparklesIcon, ChevronRightIcon,} from "@heroicons/react/24/outline";
-
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   // Sidebar navigation items
   const navItems = [
@@ -17,11 +17,15 @@ const Sidebar = () => {
       icon: ClockIcon,
     },
   ];
+  const navigate = useNavigate();
+  const navigateHomePage =()=>{
+     navigate("/");
+  }
 
   return (
     <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200/80 bg-white md:flex">
       {/* Brand header */}
-      <div className="flex h-20 items-center gap-3 border-b border-slate-100 px-6">
+      <div onClick={navigateHomePage} className="flex h-20 items-center gap-3 border-b border-slate-100 px-6 cursor-pointer">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-md shadow-indigo-200">
           <SparklesIcon className="h-6 w-6 text-white" />
         </div>

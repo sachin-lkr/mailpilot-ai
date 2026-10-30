@@ -4,10 +4,20 @@ import authRoutes from "./src/routes/authRoutes.js"
 import aiRoutes from "./src/routes/aiRoutes.js"
 import cors from "cors"
 
-
+dotenv.config();
 const app=express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://mailpilot-ai-kappa.vercel.app" 
+];
 app.use(cors({
-    origin: process.env.FRONTEND_URL || true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 const PORT = process.env.PORT || 3000;
