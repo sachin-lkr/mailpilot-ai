@@ -9,7 +9,7 @@ dotenv.config();
 const app=express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://mailpilot-ai-kappa.vercel.app" 
+  "https://mailpilot-ai-pi.vercel.app" 
 ];
 app.use(cors({
     origin: function (origin, callback) {
@@ -19,6 +19,7 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true
 }));
 const PORT = process.env.PORT || 3000;
